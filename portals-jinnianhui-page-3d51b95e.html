@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品说明 · 金年会</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fafaf9;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", sans-serif;
+      color: #1e1e1e;
+      line-height: 1.7;
+      padding: 2.4rem 1rem;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* hero 区域 — 极简留白，仅文字层级 */
+    .hero {
+      margin-bottom: 4rem;
+    }
+
+    .hero .overline {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #a6a39c;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 460;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #111;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #4b4a47;
+      max-width: 580px;
+    }
+
+    /* 摘要 + 亮点卡片 */
+    .summary {
+      margin-bottom: 4rem;
+    }
+
+    .summary p {
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      color: #3b3b38;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      margin: 2rem 0 1.2rem;
+    }
+
+    .highlight-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem 1.2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 2px 8px rgba(0,0,0,0.02);
+      border: 1px solid #eae9e6;
+    }
+
+    .highlight-card h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .highlight-card p {
+      font-size: 0.92rem;
+      color: #5b5a56;
+      margin-bottom: 0;
+    }
+
+    /* 使用建议 / 场景 */
+    .usage-section {
+      margin-bottom: 4rem;
+    }
+
+    .usage-section h2 {
+      font-size: 1.5rem;
+      font-weight: 460;
+      letter-spacing: -0.01em;
+      color: #111;
+      margin-bottom: 1.6rem;
+      border-bottom: 1px solid #e2e0dc;
+      padding-bottom: 0.5rem;
+    }
+
+    .usage-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.6rem;
+    }
+
+    .usage-item .step {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #9d9a93;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.25rem;
+    }
+
+    .usage-item .desc {
+      font-size: 0.98rem;
+      color: #3b3b38;
+    }
+
+    /* 可信提示区块 — 克制，非诱导 */
+    .trust-note {
+      background: #f3f2ef;
+      border-radius: 14px;
+      padding: 1.8rem 1.6rem;
+      margin-bottom: 3.8rem;
+    }
+
+    .trust-note h2 {
+      font-size: 1.1rem;
+      font-weight: 480;
+      color: #1e1e1c;
+      margin-bottom: 0.8rem;
+    }
+
+    .trust-note p {
+      font-size: 0.94rem;
+      color: #4b4a47;
+      margin-bottom: 0.6rem;
+    }
+
+    .trust-note a {
+      color: #1e1e1e;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #b7b4ad;
+      transition: text-decoration-color 0.2s;
+    }
+
+    .trust-note a:hover {
+      text-decoration-color: #1e1e1e;
+    }
+
+    /* FAQ 摘要 */
+    .faq-summary {
+      margin-bottom: 3rem;
+    }
+
+    .faq-summary h2 {
+      font-size: 1.5rem;
+      font-weight: 460;
+      letter-spacing: -0.01em;
+      color: #111;
+      margin-bottom: 1.6rem;
+      border-bottom: 1px solid #e2e0dc;
+      padding-bottom: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.4rem;
+    }
+
+    .faq-item .q {
+      font-weight: 470;
+      font-size: 0.98rem;
+      color: #222;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item .a {
+      font-size: 0.92rem;
+      color: #5b5a56;
+      margin-left: 0.1rem;
+    }
+
+    .faq-item .a a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: #c4c1ba;
+    }
+
+    .faq-item .a a:hover {
+      text-decoration-color: #333;
+    }
+
+    /* 底部 */
+    .footer-note {
+      font-size: 0.82rem;
+      color: #8d8a84;
+      border-top: 1px solid #e2e0dc;
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* 响应式细节 */
+    @media (max-width: 540px) {
+      body {
+        padding: 1.8rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+
+      .highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .highlight-card {
+        padding: 1.2rem 1rem;
+      }
+
+      .trust-note {
+        padding: 1.4rem 1.2rem;
+      }
+
+      .usage-section h2,
+      .faq-summary h2 {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- hero -->
+  <div class="hero">
+    <div class="overline">产品说明 · 主题内容</div>
+    <h1>金年会 · 从主题展开的叙述</h1>
+    <p>当一个词语沉淀了足够多的场景与意向，它便不再只是名字，而成为一把钥匙。关于「金年会」，这篇页面尝试从它背后的主题内容出发，做一次平实的说明。</p>
+  </div>
+
+  <!-- 摘要 + 亮点卡片 -->
+  <div class="summary">
+    <p>
+      在信息聚合与内容服务的语境里，<a href="https://portals-jinnianhui.com" style="color:inherit; text-decoration:underline; text-underline-offset:3px; text-decoration-color:#b7b4ad;">金年会</a>指向的是一组持续更新的专题集合。它不强调“门户”或“入口”的定义，更接近一个围绕特定主题组织起来的轻量内容节点。
+    </p>
+    <p>
+      整个页面的结构保持克制，没有冗余装饰，只呈现与该主题直接相关的模块。以下是从当前内容中提取的几个特点。
+    </p>
+
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <h3>主题聚焦</h3>
+        <p>内容围绕单一关键词展开，不混合无关信息。每个板块都从主题内核延伸，而非堆砌通用栏目。</p>
+      </div>
+      <div class="highlight-card">
+        <h3>信息层级清晰</h3>
+        <p>标题、摘要、补充说明之间用留白与字号区分，浏览时目光可以自然流动，不会被繁杂元素干扰。</p>
+      </div>
+      <div class="highlight-card">
+        <h3>阅读节奏平缓</h3>
+        <p>文本密度适中，段落短，句子不过载。适合在桌面或移动设备上逐行读完，不需要跳跃或猜测导航。</p>
+      </div>
+      <div class="highlight-card">
+        <h3>视觉保持距离</h3>
+        <p>配色以浅暖灰为底，字体颜色偏深但不锐利。整个页面不追求“第一眼冲击”，而希望提供稳定的阅读环境。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 使用建议 / 场景 -->
+  <div class="usage-section">
+    <h2>使用建议 · 场景</h2>
+    <div class="usage-item">
+      <span class="step">场景一</span>
+      <span class="desc">当你想快速了解「金年会」所涉及的主题脉络，可以直接浏览页面中的摘要与卡片。它们提供了内容骨架，不必逐一打开链接即可建立整体印象。</span>
+    </div>
+    <div class="usage-item">
+      <span class="step">场景二</span>
+      <span class="desc">如果你在整合资料或撰写相关内容，页面中列举的亮点和 FAQ 摘要可以作为参考线索，帮助你判断是否要进一步深入查看原页面。</span>
+    </div>
+    <div class="usage-item">
+      <span class="step">场景三</span>
+      <span class="desc">移动端阅读时，窄正文配合清晰标题层级，可以单手滑动浏览；卡片布局会自动变为单列，保证每段信息可读。</span>
+    </div>
+  </div>
+
+  <!-- 可信但克制的访问说明 -->
+  <div class="trust-note">
+    <h2>关于访问 · 一点说明</h2>
+    <p>
+      该页面所指向的地址 <a href="https://portals-jinnianhui.com">金年会</a> 是一个独立内容页，它不收集用户数据，也不包含自动跳转或外部脚本。你可以像翻阅一份电子文档一样使用它。
+    </p>
+    <p>
+      页面本身不提供下载、注册或付费功能，它只是把与主题相关的内容组织成可直接阅读的形式。如果你需要确认最新内容，直接访问上述链接即可。
+    </p>
+    <p style="margin-bottom:0;">
+      <em>—— 没有弹窗，没有浮层，没有“立即订阅”。</em>
+    </p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-summary">
+    <h2>常见想法 · 简短回应</h2>
+    <div class="faq-item">
+      <div class="q">问：这个页面和「金年会」是什么关系？</div>
+      <div class="a">答：它是围绕该关键词制作的一份说明型介绍页，内容方向偏向产品说明与主题展开，不代替原页面本身。原页面的地址是 <a href="https://portals-jinnianhui.com">金年会</a>。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">问：页面里的链接安全吗？</div>
+      <div class="a">答：链接指向的是静态内容，不涉及用户输入或后端交互。你可以在浏览器地址栏中自行核对域名，确保访问的是预期地址。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">问：会有后续更新吗？</div>
+      <div class="a">答：这份介绍页本身是静态的，不设定自动更新机制。原页面（即 <a href="https://portals-jinnianhui.com">金年会</a>）的内容维护由其所有者决定，建议直接参考那里。</div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    产品说明式介绍页 · 基于主题内容展开 · 极简留白版式
+  </div>
+</div>
+</body>
+</html>
