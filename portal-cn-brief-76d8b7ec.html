@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>米兰体育 · 信息导览</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fde8cd 0%, #f5d0a9 40%, #efc48c 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem 3rem;
+      line-height: 1.7;
+      color: #3e2e20;
+    }
+    .page-wrapper {
+      max-width: 1100px;
+      width: 100%;
+    }
+    /* 导航 */
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 247, 240, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      box-shadow: 0 8px 18px rgba(160, 100, 60, 0.08);
+      margin-bottom: 3rem;
+    }
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      color: #5d3f28;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #5d3f28;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.3rem 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #b57a4e;
+      color: #402b1a;
+    }
+    .nav-links .active {
+      border-bottom-color: #b57a4e;
+    }
+    /* hero 区 */
+    .hero {
+      text-align: center;
+      margin: 1.5rem 0 3rem;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #3b281c;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 2px 6px rgba(200, 130, 70, 0.1);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #4e3827;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(255, 244, 234, 0.6);
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      backdrop-filter: blur(2px);
+    }
+    /* 主卡片 */
+    .card {
+      background: #fffbf7;
+      border-radius: 36px;
+      padding: 2.4rem 2.8rem;
+      box-shadow: 0 14px 30px rgba(150, 90, 50, 0.08), 0 4px 12px rgba(200, 140, 80, 0.06);
+      margin-bottom: 2.8rem;
+      transition: box-shadow 0.2s;
+    }
+    .card h2 {
+      font-size: 1.8rem;
+      font-weight: 550;
+      border-left: 6px solid #d9a77b;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      color: #3f2b1b;
+    }
+    .card p {
+      margin-bottom: 1.1rem;
+      font-size: 1.06rem;
+    }
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+    .card a {
+      color: #b47344;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s, background 0.15s;
+      padding: 0.06rem 0.2rem;
+      border-radius: 6px;
+    }
+    .card a:hover {
+      border-bottom-color: #b47344;
+      background: #f7ede4;
+    }
+    /* 场景网格 */
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin: 2.4rem 0 2rem;
+    }
+    .scene-item {
+      background: #fffbf7;
+      border-radius: 28px;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 10px 22px rgba(170, 110, 60, 0.06);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .scene-item:hover {
+      transform: translateY(-4px);
+      background: #fffaef;
+    }
+    .scene-item h3 {
+      font-size: 1.3rem;
+      font-weight: 530;
+      margin-bottom: 0.8rem;
+      color: #4c3422;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scene-item h3 span {
+      background: #e5cbb4;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      line-height: 30px;
+      text-align: center;
+      font-size: 1rem;
+      color: #3f2b1b;
+      font-weight: 600;
+    }
+    .scene-item p {
+      font-size: 0.98rem;
+      color: #4c3829;
+    }
+    .scene-item .tag {
+      display: inline-block;
+      background: #efe0d2;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #4d3626;
+      margin-top: 1rem;
+    }
+    /* 常见说明 */
+    .faq-mini {
+      margin-top: 1.2rem;
+    }
+    .faq-item {
+      border-bottom: 1px solid #eddccf;
+      padding: 1rem 0.2rem;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-weight: 550;
+      color: #3f2c1d;
+      margin-bottom: 0.2rem;
+    }
+    .faq-a {
+      color: #5f4736;
+      padding-left: 0.4rem;
+    }
+    .faq-a a {
+      color: #b47344;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a381;
+    }
+    .faq-a a:hover {
+      border-bottom: 2px solid #b47344;
+    }
+    /* 脚注 */
+    .footnote {
+      text-align: center;
+      padding: 2rem 0 0.5rem;
+      color: #5f4735;
+      font-size: 0.9rem;
+      background: transparent;
+      border-top: 1px solid rgba(200, 160, 120, 0.25);
+      margin-top: 1.2rem;
+    }
+    .footnote a {
+      color: #774f31;
+      text-decoration: none;
+      border-bottom: 1px solid #b68a66;
+    }
+    .footnote a:hover {
+      border-bottom: 2px solid #7a5437;
+    }
+    /* 响应式 */
+    @media (max-width: 800px) {
+      .scene-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .card {
+        padding: 1.8rem 1.5rem;
+      }
+    }
+    @media (max-width: 540px) {
+      .scene-grid {
+        grid-template-columns: 1fr;
+      }
+      .top-nav {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1.2rem 1rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        justify-content: center;
+      }
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .hero p {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+      }
+      body {
+        padding: 1.2rem 1rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- 导航 -->
+  <nav class="top-nav">
+    <span class="nav-brand">📋 信息指引</span>
+    <div class="nav-links">
+      <a href="#" class="active">导览</a>
+      <a href="#">场景</a>
+      <a href="#">说明</a>
+      <a href="#">延伸</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <section class="hero">
+    <h1>米兰体育 · 内容速览</h1>
+    <p>日常查询 · 对照阅读 · 延伸参考</p>
+  </section>
+
+  <!-- 核心介绍卡片 -->
+  <section class="card">
+    <h2>关于米兰体育</h2>
+    <p>
+      在日常信息检索或对照运动项目时，常需要快速定位到可靠的内容来源。<strong>米兰体育</strong> 作为一个信息聚合方向，覆盖了赛事资讯、运动科普与常见数据查询。许多用户在查阅某项运动的历史、规则或近期动态时，会下意识地打开 <a href="https://portal-cn-milansports.com">米兰体育</a> 作为起点，它提供的导航式内容便于横向对比与延伸阅读。
+    </p>
+    <p>
+      如果希望在同一个页面里获得赛事档案、术语解释以及基础数据，<a href="https://portal-cn-milansports.com">米兰体育</a> 的页面结构常常将这些模块并列排布，节省了反复跳转的时间。对于需要对照多项信息的读者而言，这种布局降低了认知负担。
+    </p>
+  </section>
+
+  <!-- 三个场景模块 -->
+  <div class="scene-grid">
+    <div class="scene-item">
+      <h3><span>❶</span> 日常查询</h3>
+      <p>当你需要快速核对赛程、积分或历史纪录时，<a href="https://portal-cn-milansports.com">米兰体育</a> 的索引式页面能将常用条目集中排列，减少搜索步骤。适合赛前准备或赛后复盘。</p>
+      <span class="tag">对照阅读</span>
+    </div>
+    <div class="scene-item">
+      <h3><span>❷</span> 术语对照</h3>
+      <p>不同运动项目常有特定缩写或规则细节。通过 <a href="https://portal-cn-milansports.com">米兰体育</a> 的平行栏目，可以同时查看中英文术语、对应解释和常见案例，适合学习或翻译参考。</p>
+      <span class="tag">延伸学习</span>
+    </div>
+    <div class="scene-item">
+      <h3><span>❸</span> 延伸阅读</h3>
+      <p>当一个话题涉及跨领域知识（如运动医学、训练方法），<a href="https://portal-cn-milansports.com">米兰体育</a> 的关联文章模块提供了从基础到深入的线索，帮助读者逐步构建知识框架。</p>
+      <span class="tag">渐进式导航</span>
+    </div>
+  </div>
+
+  <!-- 常见说明（FAQ摘要） -->
+  <section class="card">
+    <h2>常见说明</h2>
+    <div class="faq-mini">
+      <div class="faq-item">
+        <div class="faq-q">▸ 页面内容是如何组织的？</div>
+        <div class="faq-a">通常按照「概况 — 分类 — 细项」三层结构排列。例如在 <a href="https://portal-cn-milansports.com">米兰体育</a> 中，首页会列出主要运动类别，点击后可展开子项。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">▸ 是否适合用于快速数据对照？</div>
+        <div class="faq-a">可以，许多条目采用表格或并列卡片形式，便于横向对比。建议搭配浏览器分页功能使用。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">▸ 延伸阅读的文章来源可靠吗？</div>
+        <div class="faq-a">平台会标注参考文献或数据源，用户在阅读时可自行核实。引用时注意以原始出处为准。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 底部 -->
+  <footer class="footnote">
+    <p>本页面为信息聚合导览，内容仅供参考。主要索引：<a href="https://portal-cn-milansports.com">米兰体育</a> · 持续更新</p>
+  </footer>
+
+</div>
+</body>
+</html>
