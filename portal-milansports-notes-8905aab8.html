@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>米兰体育 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            color: #1e1e2f;
+            line-height: 1.65;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0d0e1a 0%, #1a1c2e 100%);
+            color: #eaeef2;
+            padding: 5rem 2rem 4.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #4a7cf7, #7c9aff, #4a7cf7);
+            opacity: 0.5;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 640px;
+            margin: 0 auto;
+            color: #bcc6d4;
+            font-weight: 350;
+        }
+
+        .hero .sub {
+            display: inline-block;
+            margin-top: 1.8rem;
+            padding: 0.4rem 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #b2bdcc;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(2px);
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.8rem;
+        }
+
+        .main-section {
+            background: #ffffff;
+            margin: -1.8rem auto 2.5rem;
+            border-radius: 28px 28px 20px 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            padding: 3rem 2.5rem 2.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 目录感布局 */
+        .index-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.8rem;
+            margin: 0.6rem 0 2rem;
+        }
+
+        .index-card {
+            flex: 1 1 180px;
+            background: #f8f9fc;
+            border-radius: 18px;
+            padding: 1.2rem 1.4rem;
+            transition: background 0.15s, transform 0.1s;
+            border-left: 4px solid #4a7cf7;
+        }
+
+        .index-card:hover {
+            background: #eef0f6;
+            transform: translateY(-2px);
+        }
+
+        .index-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1f2a44;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.01em;
+        }
+
+        .index-card p {
+            font-size: 0.9rem;
+            color: #4a5066;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* 说明区 */
+        .description-block {
+            margin: 2.5rem 0 1.8rem;
+        }
+
+        .description-block h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #171e32;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #e2e6ef;
+            padding-bottom: 0.4rem;
+        }
+
+        .description-block p {
+            margin-bottom: 1rem;
+            color: #2a3045;
+        }
+
+        .description-block a {
+            color: #2b5be0;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #b4c4f0;
+            transition: border-color 0.15s, color 0.1s;
+        }
+
+        .description-block a:hover {
+            color: #0f3bb8;
+            border-bottom: 1px solid #0f3bb8;
+        }
+
+        .highlight-box {
+            background: #f0f3fb;
+            border-radius: 18px;
+            padding: 1.5rem 2rem;
+            margin: 1.6rem 0 2rem;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0.3rem;
+        }
+
+        /* 特点&场景混合卡片 */
+        .feature-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.4rem;
+            margin: 2rem 0 1.4rem;
+        }
+
+        .feature-item {
+            background: #fafbff;
+            border-radius: 16px;
+            padding: 1.2rem 1.4rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #ebedf5;
+        }
+
+        .feature-item h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1b2340;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-item p {
+            font-size: 0.92rem;
+            color: #3d4562;
+        }
+
+        /* 提示区 */
+        .tip-block {
+            background: #fcf9f2;
+            border-radius: 20px;
+            padding: 1.6rem 2rem;
+            margin: 2rem 0 1.6rem;
+            border-left: 6px solid #f0b54c;
+        }
+
+        .tip-block h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #3a2f1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .tip-block p {
+            color: #3d3a2e;
+        }
+
+        /* FAQ 摘要卡片 */
+        .faq-mini {
+            margin: 2.8rem 0 1rem;
+        }
+
+        .faq-mini h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #1f2640;
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e3e7f0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #0b132b;
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .faq-item span {
+            color: #3b4465;
+            font-size: 0.94rem;
+        }
+
+        .faq-item a {
+            color: #2b5be0;
+            border-bottom: 1px dotted #b4c4f0;
+            text-decoration: none;
+        }
+
+        .faq-item a:hover {
+            border-bottom: 1px solid #0f3bb8;
+        }
+
+        /* 相关信息区 */
+        .related-info {
+            margin: 2.8rem 0 0.8rem;
+            padding-top: 0.4rem;
+            border-top: 1px solid #dce0ec;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .related-info p {
+            font-size: 0.9rem;
+            color: #4b5370;
+            margin: 0.3rem 0;
+        }
+
+        .related-info small {
+            color: #6f7896;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 2rem 1rem 2.5rem;
+            color: #6f7891;
+            font-size: 0.85rem;
+        }
+
+        .footer-note a {
+            color: #3b63cf;
+            text-decoration: none;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .hero { padding: 3.2rem 1.2rem 3.2rem; }
+            .hero h1 { font-size: 2rem; }
+            .main-section { padding: 2rem 1.2rem; margin: -1.2rem 0.6rem 2rem; }
+            .index-card { flex: 1 1 140px; }
+            .feature-group { grid-template-columns: 1fr; }
+            .related-info { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .main-section { margin-left: 1.2rem; margin-right: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 hero -->
+    <header class="hero">
+        <h1>米兰体育 · 知识库</h1>
+        <p>信息归档 · 持续关注 · 平稳再访</p>
+        <span class="sub">再次访问者的目录入口</span>
+    </header>
+
+    <div class="container">
+        <!-- 浅色正文卡片区 -->
+        <section class="main-section">
+
+            <!-- 目录感布局：索引卡片 -->
+            <div class="index-grid">
+                <div class="index-card">
+                    <h3>📋 说明</h3>
+                    <p>背景、用途与更新记录</p>
+                </div>
+                <div class="index-card">
+                    <h3>💡 提示</h3>
+                    <p>访问前的小备忘</p>
+                </div>
+                <div class="index-card">
+                    <h3>📎 相关信息</h3>
+                    <p>延伸内容与参考</p>
+                </div>
+                <div class="index-card">
+                    <h3>❓ 常见问题</h3>
+                    <p>简短摘要</p>
+                </div>
+            </div>
+
+            <!-- 说明区 -->
+            <div class="description-block">
+                <h2>再次访问者的说明</h2>
+                <p>如果你曾浏览过 <a href="https://portal--milansports.com">米兰体育</a>，并希望保持对信息更新的关注，这个页面为你整理了基础索引。它不是一个入口或跳板，而是一个简洁的回顾点，方便你确认自己所在的位置。</p>
+                <p>我们注意到，一段时间之后再次访问某个站点，常常需要重新理解它的结构。因此这里保留了最必要的说明、提示和常见问题摘要，帮助你更快速地回到上下文里。</p>
+            </div>
+
+            <!-- 特点 & 场景 混合卡片 -->
+            <div class="feature-group">
+                <div class="feature-item">
+                    <h4>📌 持续场景</h4>
+                    <p>收藏本页可保留一个轻量的指引点，不必每次重新导航。</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔄 再次适应</h4>
+                    <p>如果间隔较久未访问，可以快速浏览下方提示与FAQ，找回之前的使用节奏。</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🧭 目录式结构</h4>
+                    <p>用卡片、说明和提示区块代替冗长的菜单，降低认知负荷。</p>
+                </div>
+            </div>
+
+            <!-- 提示区 -->
+            <div class="tip-block">
+                <h3>📌 提示</h3>
+                <p>本页面作为知识库入口，不替代原始站点的功能。若你需要查看完整内容或进行具体操作，可直接前往 <a href="https://portal--milansports.com">米兰体育</a> 的对应页面。建议你将该链接加入浏览器书签，方便日后再次访问。</p>
+                <p style="margin-top: 0.6rem;">另外，每次访问前请确保网络连接正常，并留意页面版本是否有明显变化。如果发现布局或内容不同，可能是站点更新所致，本页的说明仍可作基础参考。</p>
+            </div>
+
+            <!-- FAQ 摘要 -->
+            <div class="faq-mini">
+                <h2>常见问题 · 摘要</h2>
+                <div class="faq-item">
+                    <strong>为什么需要再次收藏？</strong>
+                    <span>浏览器书签或历史记录可以帮助你快速回到 <a href="https://portal--milansports.com">米兰体育</a>。如果你清除了缓存，本页也可以作为一个记忆锚点。</span>
+                </div>
+                <div class="faq-item">
+                    <strong>这个页面会更新吗？</strong>
+                    <span>说明与提示区会不定期调整，以反映访问者常遇到的问题。但核心链接保持不变。</span>
+                </div>
+                <div class="faq-item">
+                    <strong>是否还有其他相关信息？</strong>
+                    <span>相关信息区汇总了一些补充内容，但主要入口仍然是 <a href="https://portal--milansports.com">米兰体育</a> 本身。</span>
+                </div>
+            </div>
+
+            <!-- 相关信息区 -->
+            <div class="related-info">
+                <p><span style="font-weight: 500;">相关信息</span> · 本页作为知识库入口，仅提供概括性指引。所有操作和详细内容以 <a href="https://portal--milansports.com">米兰体育</a> 实际页面为准。</p>
+                <p><small>建议定期清理浏览器缓存，并核对链接有效性。如需反馈，可参考站点内联系方式。</small></p>
+            </div>
+
+        </section>
+    </div>
+
+    <footer class="footer-note">
+        <p>知识库入口 · 持续关注 · <a href="https://portal--milansports.com">米兰体育</a></p>
+        <p style="margin-top: 0.4rem; opacity: 0.6;">更新记录以原始站点为准</p>
+    </footer>
+
+</body>
+</html>
